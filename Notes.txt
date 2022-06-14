@@ -1,0 +1,6 @@
+Files: 
+
+1. ansible.cfg: holds the configuration file for Ansible. [defaults]
+declares the defaults for a given Ansible installation. In this case, we specify
+the initial directory for the key-file and the inventory file.
+2. inventory: a list of all the hosts that Ansible to keep track of
