@@ -5,6 +5,15 @@ declares the defaults for a given Ansible installation. In this case, we specify
 the initial directory for the key-file and the inventory file.
 2. inventory: a list of all the hosts that Ansible to keep track of
 
+Provisioning Other Servers:
+
+ssh-keygen -t ed25519 -C "ANSIBLE MASTER"
+//Enter file in which to save the key (/home/parallels/.ssh/id_ed25519):// /home/parallels/.ssh/ansible
+
+- saves the key as "ansible.pub" so we can use it later
+
+ssh-copy-id -i ~/.ssh/ansible.pub 10.211.55.4 //copy ansible key to another IP
+
 
 Ad-Hoc Commands:
 
@@ -19,7 +28,7 @@ Ansible ONLY UPDATES WHEN THERE ARE CHANGES THAT NEED TO BE MADE (ie: installing
 
 Use "quotes" when you have more than 1 argument (ie: "argument1=a argument2=b argument3=c")
 
-Playbooks:
+Playbooks: https://docs.ansible.com/ansible/2.4/playbooks.html
 
 Defines the state of an environment and the 'plays' (commands) required to get it to that point.
 
@@ -39,3 +48,7 @@ example playbook:
     - name: Install Apache2 package (can be whatever we want)
       apt: (the module we are going to be running)
         name: apache2 (the arguments for that module- apt has a "name" argument, check ansible docs for this)
+
+
+When: ansible_distribution in ["Ubuntu"]
+"when clause": when variable in [list of acceptable values]
