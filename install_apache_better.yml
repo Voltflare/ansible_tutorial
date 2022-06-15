@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Install Apache2 and PHP package and Update repository index
+      apt:
+        name: 
+          - apache2
+          - libapache2-mod-php
+        state: latest
+        update_cache: yes
+      when: ansible_distribution in ["Ubuntu"]
+
+
+    - name: Install Apache2 and PHP package and update repository indexs
+      dnf:
+        name: 
+          - httpd
+          - php
+        state: latest
+        update_cache: yes
+      when: ansible_distribution in ["CentOS"]
