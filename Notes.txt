@@ -4,3 +4,38 @@ Files:
 declares the defaults for a given Ansible installation. In this case, we specify
 the initial directory for the key-file and the inventory file.
 2. inventory: a list of all the hosts that Ansible to keep track of
+
+
+Ad-Hoc Commands:
+
+ansible all -m apt -a update_cache=true --become --ask-become-pass
+"Run this ansible command on all, with the apt module, (-a = argument flag) updating the cache for them all
+and BECOME root (the equivalent of running sudo privileges) with the sudo password (-ask-become-pass)
+
+
+Ansible ONLY UPDATES WHEN THERE ARE CHANGES THAT NEED TO BE MADE (ie: installing the same thing does nothing)
+- you can also check the history.log files in the servers to see what it is that Ansible runs on each servers
+
+
+Use "quotes" when you have more than 1 argument (ie: "argument1=a argument2=b argument3=c")
+
+Playbooks:
+
+Defines the state of an environment and the 'plays' (commands) required to get it to that point.
+
+YAML Format: Inventory file begins with "---" on its own line
+Statements begin with "-"
+
+ie: "- hosts: all"
+
+example playbook:
+
+--- (starting character)
+
+- hosts: all (run this on all hosts)
+  become: true (as sudo)
+  tasks: (gives the list of all our tasks)
+
+    - name: Install Apache2 package (can be whatever we want)
+      apt: (the module we are going to be running)
+        name: apache2 (the arguments for that module- apt has a "name" argument, check ansible docs for this)
